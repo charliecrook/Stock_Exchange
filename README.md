@@ -14,12 +14,13 @@ The SORT class takes in a list of different exchanges and a list of all stocks t
 - The stock name matches
 - The requested prices of the two orders is within a spread of 5
 In this case, the sell order satisfies as much of the buy order as possible, and the two orders are updated to reflect this. A trade log is kept of all executed orders. The SORT class also contains a method, check_order_status, that prints whether each order is filled, partially filled or not yet matched for a given order book.
+SORT is dependent on Exchange.
 
 ### UserMenu class
-This class performs operations using the above classes according to user inputs. All options refer to the order books in the given input exchange. Both the desired exchange and the SORT class must be passed into this class. UserMenu is dependent on SORT.
+This class performs operations using the above classes according to user inputs. All options refer to the order books in the given input exchange. Both the desired exchange and the SORT class must be passed into this class. UserMenu is dependent on Exchange and SORT.
 
 ### FileManager class
-This class reads and write an OrderBooks to/from a csv file.]
+This class reads and write an OrderBooks to/from a csv file.
 
 ### Utilities class
 This class contains some utility functions that are used by the other classes.
