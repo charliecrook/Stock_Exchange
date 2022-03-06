@@ -3,7 +3,7 @@ import time
 import datetime
 from datetime import timedelta
 
-# function generates a random date
+# function to generate a random date
 def random_date(start, end):
     frmt = '%d-%m-%Y %H:%M:%S'
 
@@ -14,7 +14,7 @@ def random_date(start, end):
     dt = datetime.datetime.fromtimestamp(time.mktime(time.localtime(ptime)))
     return dt
 
-# function creates a dictionary of orders of form {reference_no: (stock_name, price, quantity, timestamp)}
+# function creates a dictionary of orders of form {reference_no: [stock_name, price, quantity, timestamp]}
 def create_orders(stocks, ref):
     orders = {}
     for stock in stocks:
