@@ -14,7 +14,6 @@ class OrderBook:
         stock = input("Enter company name: ")
         price = float(input("Enter price: "))
         quantity = int(input("Enter quantity: "))
-        # note: can use datetime.utcnow() to get current timestamp with second fractions
         self.orders[max(self.orders.keys())+1] = [stock, price, quantity, datetime.datetime.fromtimestamp(time.mktime(time.localtime()))]
         print("________________________\n")
         
@@ -45,7 +44,7 @@ class OrderBook:
             print("________________________\n")
                        
 
-# Exchange class depends on OrderBook class. It mimics a stock exchange with buy orders, sell orders and a fee ladder
+# Exchange class depends on OrderBook class. It mimics a stock exchange with buy orders, sell orders and a fee ladder.
 class Exchange:
     
     def __init__(self, buy_order_book, sell_order_book, fee_ladder):
@@ -82,6 +81,7 @@ class SORT:
         self.stocks = stocks
         self.trade_log = {}
 
+    # this method runs the order matching algorithm
     def __run__(self):
         self.merged_buy_orders, self.merged_sell_orders = Utilities.merge_order_books(self.exchanges)
         self.matched_buy_orders, self.matched_sell_orders = self.match() # these are concatonated order books after trades
@@ -110,8 +110,7 @@ class SORT:
                     print("________________________\n")
                     buy_orders[i][2] -= trade_quantity
                     sell_orders[j][2] -= trade_quantity
-                    self.trade_log[Utilities.concat(i, j)] = (buy_orders[i][0], trade_price, trade_quantity)
-                    
+                    self.trade_log[Utilities.concat(i, j)] = (buy_orders[i][0], trade_price, trade_quantity)          
         return buy_orders, sell_orders
     
     def check_spread(self, buy_orders, buy_ref, sell_orders, sell_ref):
@@ -133,6 +132,7 @@ class SORT:
         return order_book
     
     def check_order_status(self, order_book):
+        print("________________________\n")
         for order in order_book.orders:
             if (order in self.matched_buy_orders.keys() or self.matched_sell_orders.keys()) and order_book.orders[order][2] == 0:
                 print("Order reference {} partially filled.".format(order))
@@ -162,11 +162,13 @@ class UserMenu:
             except:
                 print("________________________\n")
                 print("You must enter a number between 1 and {}.".format(number_options))
+                print("________________________\n")
                 continue
             
             if user_input not in input_options:
                 print("________________________\n")
                 print("\nYou must enter a number between 1 and {}.".format(number_options))
+                print("________________________\n")
                 continue
                 
             elif user_input == 1:
@@ -207,11 +209,13 @@ class UserMenu:
             except:
                 print("________________________\n")
                 print("You must enter a number between 1 and {}.".format(number_options))
+                print("________________________\n")
                 continue
             
             if user_input not in input_options:
                 print("________________________\n")
                 print("\nYou must enter a number between 1 and {}.".format(number_options))
+                print("________________________\n")
                 continue
                 
             elif user_input == 1:
@@ -251,20 +255,20 @@ class UserMenu:
             except:
                 print("________________________\n")
                 print("You must enter a number between 1 and {}.".format(number_options))
+                print("________________________\n")
                 continue
             
             if user_input not in input_options:
                 print("________________________\n")
                 print("\nYou must enter a number between 1 and {}.".format(number_options))
+                print("________________________\n")
                 continue
                 
             elif user_input == 1:
-                #self.exchange.calc_fees(self.exchange.buy_order_book)
                 return self.exchange.buy_order_book
                 break
                 
             elif user_input == 2:
-                #self.exchange.calc_fees(self.exchange.sell_order_book)
                 return self.exchange.sell_order_book
                 break
 
