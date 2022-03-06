@@ -3,7 +3,7 @@ import time
 import datetime
 from datetime import timedelta
 
-# This function generates a random date
+# function generates a random date
 def random_date(start, end):
     frmt = '%d-%m-%Y %H:%M:%S'
 
